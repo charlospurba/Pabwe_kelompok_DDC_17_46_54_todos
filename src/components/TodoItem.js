@@ -1,9 +1,12 @@
 import React from "react";
 import * as Icon from "react-feather";
 import { formatDate } from "../utils/tools";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+
 function TodoItem({ todo, onDelete, onTodoFinished, isDetail }) {
+  const navigate = useNavigate(); // untuk navigasi ke halaman edit
+
   let buttonAction;
   if (!todo.is_finished) {
     buttonAction = (
@@ -26,6 +29,7 @@ function TodoItem({ todo, onDelete, onTodoFinished, isDetail }) {
       </button>
     );
   }
+
   return (
     <div className="card mb-3">
       <div className="card-body">
@@ -71,8 +75,7 @@ function TodoItem({ todo, onDelete, onTodoFinished, isDetail }) {
                     Swal.fire({
                       title: "Hapus Todo",
                       // eslint-disable-next-line quotes
-                      text: `Apakah kamu yakin ingin mehapus todo:
-${todo.title}?`,
+                      text: `Apakah kamu yakin ingin mehapus todo: ${todo.title}?`,
                       icon: "warning",
                       showCancelButton: true,
                       confirmButtonText: "Ya, Tetap Hapus",
@@ -83,7 +86,6 @@ ${todo.title}?`,
                       buttonsStyling: false,
                     }).then((result) => {
                       if (result.isConfirmed) {
-                        // eslint-disable-next-line no-undef
                         onDelete(todo.id);
                       }
                     });
@@ -91,6 +93,12 @@ ${todo.title}?`,
                   className="btn btn-danger"
                 >
                   <Icon.Trash />
+                </button>
+                <button
+                  onClick={() => navigate(`/edit/${todo.id}`)} // arahkan ke halaman edit
+                  className="btn btn-warning ms-2"
+                >
+                  <Icon.Edit />
                 </button>
               </div>
             </div>
@@ -100,6 +108,7 @@ ${todo.title}?`,
     </div>
   );
 }
+
 TodoItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -114,4 +123,5 @@ TodoItem.propTypes = {
   onTodoFinished: PropTypes.func.isRequired,
   isDetail: PropTypes.bool.isRequired,
 };
+
 export default TodoItem;
