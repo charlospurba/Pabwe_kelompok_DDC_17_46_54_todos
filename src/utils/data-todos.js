@@ -184,7 +184,7 @@ function getAllTodo() {
   return todos;
 }
 function getTodo(id) {
-  return todos.find((todo) => todo.id === id);
+  return todos.find((todo) => todo.id == id);
 }
 function addTodo({ title, description }) {
   todos = [
