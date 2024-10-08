@@ -95,7 +95,7 @@ function TodoItem({ todo, onDelete, onTodoFinished, isDetail }) {
                   <Icon.Trash />
                 </button>
                 <button
-                  onClick={() => navigate(`/edit/${todo.id}`)} // arahkan ke halaman edit
+                  onClick={() => navigate(`/edit/${todo.id}`)} // edit
                   className="btn btn-warning ms-2"
                 >
                   <Icon.Edit />
