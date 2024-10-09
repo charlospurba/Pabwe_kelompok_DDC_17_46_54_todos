@@ -51,4 +51,4 @@ function DetailPage() {
   }
   return resultRender;
 }
-export default DetailPage;
+export default DetailPage; 
